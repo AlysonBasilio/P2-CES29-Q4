@@ -16,9 +16,11 @@ public class VulnerableClass {
 	    	opr= opr.charAt(0)+"";
 	    if (opr.equals("W")){
 			try {
-				PrintWriter pWrite = new PrintWriter(new FileWriter(FILENAME));
+				FileWriter arq = new FileWriter(FILENAME);
+				PrintWriter pWrite = new PrintWriter(arq);
 				pWrite.append(texto + "\n");
 			    pWrite.close();
+			    arq.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			} 
@@ -36,12 +38,16 @@ public class VulnerableClass {
 	    	opr= opr.charAt(0)+"";
 		if (opr.equals("R")){
 			try {
-				BufferedReader br = new BufferedReader(new FileReader(FILENAME));
-				String result= br.readLine();
-				while (result != null) {
-					result += br.readLine();
+				FileReader arq = new FileReader(FILENAME);
+				BufferedReader br = new BufferedReader(arq);
+				String result = "";
+				String aux;
+				while ((aux = br.readLine()) != null) {
+					System.out.println(".");
+					result += aux;
 				}
 				br.close();
+				arq.close();
 				return result;
 			} catch (IOException e) {
 				e.printStackTrace();
